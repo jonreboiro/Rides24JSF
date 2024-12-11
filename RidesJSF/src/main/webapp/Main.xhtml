@@ -46,6 +46,10 @@
                         <p:commandButton value="Login" action="#{Main.goToLogin}" rendered="#{Main.isGuest()}" />
                     </td>
                 </tr>
+                <tr>
+                	<td><p:commandButton value="Logout" action="#{Main.logout}" rendered="#{Main.isLoggedIn()}" update="@form" />
+                	</td>
+                </tr>
 
 			</table>
 

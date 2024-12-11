@@ -239,15 +239,24 @@ public class DataAccess {
 	public User getUser(String email) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		 Query query = session.createQuery(
-		            "SELECT u FROM Driver u WHERE u.email = :email " +
-		            "UNION " +
-		            "SELECT u FROM Traveler u WHERE u.email = :email"
-		        );
-		query.setParameter("email", email);
-		User user = (User) query.uniqueResult();
-		session.getTransaction().commit();
-		return user;
+
+		try {
+			Query driverQuery = session.createQuery("FROM Driver d WHERE d.email = :email");
+			driverQuery.setParameter("email", email);
+			User user = (User) driverQuery.uniqueResult();
+
+			if (user == null) {
+				Query travelerQuery = session.createQuery("FROM Traveler t WHERE t.email = :email");
+				travelerQuery.setParameter("email", email);
+				user = (User) travelerQuery.uniqueResult();
+			}
+
+			session.getTransaction().commit();
+			return user;
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
 	}
 
 	public boolean register(User user) {
@@ -259,16 +268,20 @@ public class DataAccess {
 		session.beginTransaction();
 
 		try {
-			 Query query = session.createQuery(
-			            "SELECT u FROM Driver u WHERE u.email = :email " +
-			            "UNION " +
-			            "SELECT u FROM Traveler u WHERE u.email = :email"
-			        );
-			 query.setParameter("email", user.getEmail());
-			 List<User> existingUsers = query.list();
-			 if (!existingUsers.isEmpty()) {
-		            return false;
-		        }
+			Query driverQuery = session.createQuery("FROM Driver d WHERE d.email = :email");
+			driverQuery.setParameter("email", user.getEmail());
+			User existingUser = (User) driverQuery.uniqueResult();
+
+			if (existingUser == null) {
+				Query travelerQuery = session.createQuery("FROM Traveler t WHERE t.email = :email");
+				travelerQuery.setParameter("email", user.getEmail());
+				existingUser = (User) travelerQuery.uniqueResult();
+			}
+
+			if (existingUser != null) {
+				session.getTransaction().rollback();
+				return false;
+			}
 
 			session.persist(user);
 			session.getTransaction().commit();

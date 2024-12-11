@@ -65,5 +65,9 @@ public class LoginBean implements Serializable {
 	public String fromLoginToRegister () {
 		return "Register";
 	}
+	
+	public String back() {
+		return "fromLoginToMain";
+		}
 
 }

@@ -42,6 +42,15 @@ public class MainBean {
     	}
         return false;
     }
+    
+    public boolean isLoggedIn() {
+        return this.businessLogic.getCurrentUser() != null;
+    }
+    
+    public String logout() {
+        businessLogic.setCurrentUser(null);
+        return "refreshMain";
+    }
 
    
 }
