@@ -71,7 +71,7 @@ public class DataAccess {
 
 				Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
 				Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
-				Driver driver3 = new Driver("driver3@gmail.com", "Test driver", "1234 ");
+				Driver driver3 = new Driver("driver3@gmail.com", "Test driver", "1234");
 
 				driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
 				driver1.addRide("Donostia", "Gazteiz", UtilDate.newDate(year, month, 6), 4, 8);
