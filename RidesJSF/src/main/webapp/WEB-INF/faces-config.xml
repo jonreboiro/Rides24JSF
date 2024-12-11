@@ -23,6 +23,16 @@
 		<managed-bean-class>rides.bean.QueryRidesBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>login</managed-bean-name>
+		<managed-bean-class>rides.bean.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>register</managed-bean-name>
+		<managed-bean-class>rides.bean.RegisterBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 
@@ -48,5 +58,53 @@
 
 		</navigation-case>
 
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Main.xhtml</display-name>
+		<from-view-id>/Main.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToLogin</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Main.xhtml</display-name>
+		<from-view-id>/Main.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToRegister</from-outcome>
+			<to-view-id>/Register.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>fromLoginToRegister</from-outcome>
+			<to-view-id>/Register.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Register.xhtml</display-name>
+		<from-view-id>/Register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>fromRegisterToLogin</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>fromLoginToMain</from-outcome>
+			<to-view-id>/Main.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Register.xhtml</display-name>
+		<from-view-id>/Register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>fromRegisterToMain</from-outcome>
+			<to-view-id>/Main.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

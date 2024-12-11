@@ -19,7 +19,6 @@ import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
 public class QueryRidesBean {
-	private List<String> departCities;
 	private List<String> arrivalCities;
 	private Date data;
 	private List<Ride> filteredRides;
@@ -31,9 +30,7 @@ public class QueryRidesBean {
 
 	public QueryRidesBean() {
 		businessLogic = FacadeBean.getBusinessLogic();
-		this.departCities = new ArrayList<>();
 		this.arrivalCities = new ArrayList<>();
-		departCities = businessLogic.getDepartCities();
 		filteredRides = new ArrayList<>();
 
 	}
@@ -75,11 +72,7 @@ public class QueryRidesBean {
 	}
 
 	public List<String> getDepartCities() {
-		return departCities;
-	}
-
-	public void setDepartCities(List<String> departCities) {
-		this.departCities = departCities;
+		return businessLogic.getDepartCities();
 	}
 
 	public List<String> getArrivalCities() {

@@ -33,9 +33,19 @@
 				<tr>
 
 					<td><p:commandButton value="Create Ride"
-							action="#{Main.goToCreateRide}" /></td>
+							action="#{Main.goToCreateRide}" rendered="#{Main.isDriver()}" /></td>
 
 				</tr>
+				 <tr>
+                    <td>
+                        <p:commandButton value="Register" action="#{Main.goToRegister}" rendered="#{Main.isGuest()}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:commandButton value="Login" action="#{Main.goToLogin}" rendered="#{Main.isGuest()}" />
+                    </td>
+                </tr>
 
 			</table>
 

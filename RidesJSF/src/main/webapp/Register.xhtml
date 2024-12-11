@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+    <h:head>
+        <title>Register</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h3>Register</h3>
+            <table>
+                <tr>
+                    <td>Email:</td>
+                    <td><h:inputText value="#{register.email}" required="true"/></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><h:inputText value="#{register.name}" required="true"/></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><h:inputSecret value="#{register.password}" required="true"/></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password:</td>
+                    <td><h:inputSecret value="#{register.confirmPassword}" required="true"/></td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td>
+                        <h:selectOneMenu value="#{register.role}">
+                            <f:selectItem itemValue="Traveler" itemLabel="Traveler"/>
+                            <f:selectItem itemValue="Driver" itemLabel="Driver"/>
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <h:commandButton value="Register" action="#{register.register}" />
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <div style="text-align:center">
+                <h:commandButton value="Already Registered? Login Here" action="#{register.fromRegisterToLogin}" immediate="true"/>
+            </div>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
