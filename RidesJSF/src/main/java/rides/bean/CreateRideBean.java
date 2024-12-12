@@ -76,7 +76,7 @@ public class CreateRideBean implements Serializable {
 	public void createRide() {
 
 		try {
-			facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, "driver3@gmail.com");
+			facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, this.facadeBL.getCurrentUser().getEmail());
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Ride created successfully", null));
 		} catch (Exception e) {
