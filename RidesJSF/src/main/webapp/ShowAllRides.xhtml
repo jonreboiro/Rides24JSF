@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title>Show driver's ride</title>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h3>Show driver's every ride</h3>
+			<table>
+				<tr>
+					<td>Choose a driver:</td>
+					<td><p:selectOneMenu id="driver"
+							value="#{showAllRides.selectedDriver}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItems value="#{showAllRides.drivers}" var="driver"
+								itemValue="#{driver}" itemLabel="#{driver}" />
+							<p:ajax event="change"
+								listener="#{showAllRides.chooseDriver}" />
+						</p:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td><p:commandButton value="Bidai guztiak erakutsi" immediate="true"
+							action="#{showAllRides.showRides}" /></td>
+				</tr>
+			</table>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

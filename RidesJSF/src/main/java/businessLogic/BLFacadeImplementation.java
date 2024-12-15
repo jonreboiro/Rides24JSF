@@ -17,6 +17,7 @@ import exceptions.RideAlreadyExistException;
 public class BLFacadeImplementation implements BLFacade {
 	DataAccess dbManager;
 	private User currentUser;
+	private String chosenDriver;
 	
 	public BLFacadeImplementation() {
 		System.out.println("Creating BLFacadeImplementation instance");
@@ -102,6 +103,27 @@ public class BLFacadeImplementation implements BLFacade {
 
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+	}
+
+	@Override
+	public List<String> getDrivers() {
+		return this.dbManager.getDrivers();
+	}
+
+	@Override
+	public void setChosenDriver(String email) {
+		this.chosenDriver = email;
+		
+	}
+
+	@Override
+	public String getChosenDriver() {
+		return this.chosenDriver;
+	}
+
+	@Override
+	public List<Ride> getRidesByDriver(String driverEmail) {
+		return this.dbManager.getRidesByDriver(driverEmail);
 	}
 
 }

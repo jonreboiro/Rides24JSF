@@ -51,6 +51,10 @@ public class MainBean {
         businessLogic.setCurrentUser(null);
         return "refreshMain";
     }
+    
+    public String showAllRides () {
+    	return "showAllRides";
+    }
 
    
 }

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17327914104700" configfile="/RidesJSF/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="Main.xhtml" x="84" y="372" id="pf17339155519290" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf17339155519291 pf17339155519292 pf17339157628065 pf17339157628066 pf17339513948830" inlinks="pf173391891542111 pf173391891542112 pf17339513948830" path="/Main.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Main.xhtml" x="84" y="372" id="pf17339155519290" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf17339155519291 pf17339155519292 pf17339157628065 pf17339157628066 pf17339513948830 pf17339982142562" inlinks="pf173391891542111 pf173391891542112 pf17339513948830" path="/Main.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="CreateRide.xhtml" x="673" y="168" id="pf17339155519293" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf17339155519291" path="/CreateRide.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="QueryRides.xhtml" x="672" y="564" id="pf17339155519294" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf17339155519292" path="/QueryRides.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Login.xhtml" x="691" y="288" id="pf17339157628067" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf17339187668339 pf173391891542111" inlinks="pf17339157628065 pf173391876683310" path="/Login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Register.xhtml" x="683" y="406" id="pf17339157628068" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf173391876683310 pf173391891542112" inlinks="pf17339157628066 pf17339187668339" path="/Register.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ShowAllRides.xhtml" id="pf17339982142563" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" outlinks="pf17339985731464" inlinks="pf17339982142562" path="/ShowAllRides.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="DriverRides.xhtml" x="360" y="83" id="pf17339985731465" inlinks="pf17339985731464" path="/DriverRides.xhtml"/>
   <links id="pf17339155519291" target="pf17339155519293" source="pf17339155519290" outcome="goToCreateRide"/>
   <links id="pf17339155519292" target="pf17339155519294" source="pf17339155519290" outcome="goToQueryRides"/>
   <links id="pf17339157628065" target="pf17339157628067" source="pf17339155519290" outcome="goToLogin"/>
@@ -18,4 +20,6 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf17339982142562" target="pf17339982142563" source="pf17339155519290" outcome="showAllRides"/>
+  <links id="pf17339985731464" target="pf17339985731465" source="pf17339982142563" outcome="driversRides"/>
 </pageflow:Pageflow>

@@ -74,7 +74,7 @@ public class Ride implements Serializable {
 	 * @return the origin location
 	 */
 
-	public String getFrom() {
+	public String getFromCity() {
 		return fromCity;
 	}
 
@@ -85,7 +85,7 @@ public class Ride implements Serializable {
 	 * @param origin to be set
 	 */	
 	
-	public void setFrom(String origin) {
+	public void setFromCity(String origin) {
 		this.fromCity = origin;
 	}
 
@@ -95,7 +95,7 @@ public class Ride implements Serializable {
 	 * @return the destination location
 	 */
 
-	public String getTo() {
+	public String getToCity() {
 		return toCity;
 	}
 
@@ -105,7 +105,7 @@ public class Ride implements Serializable {
 	 * 
 	 * @param destination to be set
 	 */	
-	public void setTo(String destination) {
+	public void setToCity(String destination) {
 		this.toCity = destination;
 	}
 

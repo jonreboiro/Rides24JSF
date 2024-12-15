@@ -293,4 +293,38 @@ public class DataAccess {
 		}
 	}
 
+	public List<String> getDrivers() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		try {
+			Query query = session.createQuery("SELECT d.email FROM Driver d");
+			List<String> drivers = query.list();
+			session.getTransaction().commit();
+			return drivers;
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		}
+	}
+
+	public List<Ride> getRidesByDriver(String driverEmail) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        try {
+            Query query = session.createQuery(
+                "SELECT r FROM Ride r WHERE r.driver.email = :email");
+            query.setParameter("email", driverEmail);
+
+            List<Ride> rides = query.list();
+            session.getTransaction().commit();
+
+            return rides;
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
 }

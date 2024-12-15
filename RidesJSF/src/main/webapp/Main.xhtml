@@ -50,6 +50,14 @@
                 	<td><p:commandButton value="Logout" action="#{Main.logout}" rendered="#{Main.isLoggedIn()}" update="@form" />
                 	</td>
                 </tr>
+                <tr>
+                	<td><p:commandButton value="ShowAllRides" action="#{Main.showAllRides}" />
+                	</td>
+                </tr>
+                <tr>
+                	<td><p:commandButton value="Book" action="#{Main.bookRide}" />
+                	</td>
+                </tr>
 
 			</table>
 

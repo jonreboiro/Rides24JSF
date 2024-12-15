@@ -33,6 +33,16 @@
 		<managed-bean-class>rides.bean.RegisterBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>showAllRides</managed-bean-name>
+		<managed-bean-class>rides.bean.ShowAllRidesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>driverRides</managed-bean-name>
+		<managed-bean-class>rides.bean.DriverRidesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 
@@ -113,6 +123,22 @@
 		<navigation-case>
 			<from-outcome>refreshMain</from-outcome>
 			<to-view-id>/Main.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Main.xhtml</display-name>
+		<from-view-id>/Main.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>showAllRides</from-outcome>
+			<to-view-id>/ShowAllRides.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>ShowAllRides.xhtml</display-name>
+		<from-view-id>/ShowAllRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>driversRides</from-outcome>
+			<to-view-id>/DriverRides.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

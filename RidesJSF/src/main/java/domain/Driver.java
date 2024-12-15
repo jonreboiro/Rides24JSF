@@ -54,7 +54,7 @@ public class Driver extends User implements Serializable {
 	 */
 	public boolean doesRideExists(String from, String to, Date date) {
 		for (Ride r : rides)
-			if ((java.util.Objects.equals(r.getFrom(), from)) && (java.util.Objects.equals(r.getTo(), to))
+			if ((java.util.Objects.equals(r.getFromCity(), from)) && (java.util.Objects.equals(r.getToCity(), to))
 					&& (java.util.Objects.equals(r.getDate(), date)))
 				return true;
 
@@ -67,7 +67,7 @@ public class Driver extends User implements Serializable {
 		Ride r = null;
 		while (!found && index <= rides.size()) {
 			r = rides.get(++index);
-			if ((java.util.Objects.equals(r.getFrom(), from)) && (java.util.Objects.equals(r.getTo(), to))
+			if ((java.util.Objects.equals(r.getFromCity(), from)) && (java.util.Objects.equals(r.getToCity(), to))
 					&& (java.util.Objects.equals(r.getDate(), date)))
 				found = true;
 		}

@@ -86,4 +86,12 @@ public interface BLFacade {
 	
 	public User getCurrentUser();
 
+	public List<String> getDrivers();
+
+	public void setChosenDriver(String email);
+
+	public String getChosenDriver();
+
+	public List<Ride> getRidesByDriver(String driverEmail);
+
 }
