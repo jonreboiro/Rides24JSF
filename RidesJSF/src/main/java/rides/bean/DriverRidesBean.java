@@ -30,6 +30,7 @@ public class DriverRidesBean {
 	}
 
 	public List<Ride> getDriverRides() {
+		this.loadDriverRides();
 		return this.driverRides;
 	}
 	
@@ -50,6 +51,10 @@ public class DriverRidesBean {
             driverRides = null;
         }
     }
+	
+	public String back() {
+		return "ShowAllRides";
+	}
 	
 	
 }

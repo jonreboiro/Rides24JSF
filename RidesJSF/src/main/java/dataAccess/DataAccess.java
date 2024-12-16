@@ -20,6 +20,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import configuration.UtilDate;
+import domain.Alert;
 import domain.Booking;
 import domain.Driver;
 import domain.Ride;
@@ -366,6 +367,32 @@ public class DataAccess {
 	        session.getTransaction().rollback();
 	        throw e;
 	    }
+	}
+
+	public void createAlert(Alert newAlert) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    session.beginTransaction();
+	    
+	    try {
+            session.persist(newAlert); 
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error creating alert: " + e.getMessage());
+        }  
+	}
+	
+	public void updateTraveler(Traveler traveler) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    session.beginTransaction();
+	    
+	    try {
+            session.update(traveler); 
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error updating traveler: " + e.getMessage());
+        }  
 	}
 
 

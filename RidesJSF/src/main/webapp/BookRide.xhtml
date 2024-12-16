@@ -49,7 +49,7 @@
 				</tr>
 				<tr>
 					<td><p:commandButton value="Aukeratu"
-							action="#{bookRide.updateRides}" update="rideTable" /></td>
+							action="#{bookRide.updateRides}" update="@form" /></td>
 				</tr>
 				<tr>
 					<td>Rides:</td>
@@ -89,6 +89,13 @@
 					<td><p:commandButton value="Book"
 							action="#{bookRide.bookRide}" update="messages" /></td>
 				</tr>
+				<tr>
+                    <td colspan="2" style="text-align:center;">
+                        <p:commandButton value="Create Alert" 
+                            action="#{bookRide.createAlert}" 
+                            rendered="#{bookRide.pressed() and empty bookRide.filteredRides}" />
+                    </td>
+                </tr>
 				<tr>
 					<td><p:commandButton value="Close" immediate="true"
 							action="#{bookRide.close}" /></td>

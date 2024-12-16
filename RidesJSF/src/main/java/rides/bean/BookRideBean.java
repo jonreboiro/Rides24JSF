@@ -14,6 +14,7 @@ import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Alert;
 import domain.Booking;
 import domain.Ride;
 import domain.Traveler;
@@ -29,7 +30,8 @@ public class BookRideBean {
 	private List<Integer> seatOptions;
 	private Ride selectedRide;
 	private Integer numSeats;
-
+	public boolean isAukeratuPressed;
+	
 
 
 	private BLFacade businessLogic;
@@ -39,8 +41,10 @@ public class BookRideBean {
 		this.arrivalCities = new ArrayList<>();
 		filteredRides = new ArrayList<>();
 		seatOptions = new ArrayList<>();
+		this.isAukeratuPressed = false;
 
 	}
+
 
 	public List<Ride> getFilteredRides() {
 		return filteredRides;
@@ -105,15 +109,22 @@ public class BookRideBean {
 	public void updateRides() {
 		if (selectedDepartCity != null && selectedArrivalCity != null && data != null) {
 			filteredRides = businessLogic.getRides(selectedDepartCity, selectedArrivalCity, data);
+			this.isAukeratuPressed = true;
 			if (filteredRides == null || filteredRides.isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "No rides found for the selected criteria.", ""));
 			}
 		} else {
 			filteredRides = null;
+			this.isAukeratuPressed = false;
 		}
 	}
-	
+
+
+	public void setAukeratuPressed(boolean isAukeratuPressed) {
+		this.isAukeratuPressed = isAukeratuPressed;
+	}
+
 	public void sartuArrivalCities() {
 		System.out.println(this.selectedArrivalCity + "listener");
 	}
@@ -128,17 +139,17 @@ public class BookRideBean {
 		}
 	}
 	
-	public String bookRide() {
+	public void bookRide() {
         if (selectedRide == null) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No ride selected.", ""));
-            return null;
+            return;
         }
 
         if (numSeats == null || numSeats <= 0) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please select a valid number of seats.", ""));
-            return null;
+            return;
         }
 
         try {
@@ -146,7 +157,7 @@ public class BookRideBean {
             if (currentTraveler == null) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "You must be logged in as a traveler to book a ride.", ""));
-                return null;
+                return;
             }
 
             double totalPrice = selectedRide.getPrice() * numSeats;
@@ -154,13 +165,13 @@ public class BookRideBean {
             if (currentTraveler.getMoney() < totalPrice) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insufficient funds to book this ride.", ""));
-                return null;
+                return;
             }
 
             if (selectedRide.getnPlaces() < numSeats) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Not enough seats available.", ""));
-                return null;
+                return;
             }
 
             Booking booking = new Booking(selectedRide, currentTraveler, numSeats);
@@ -173,12 +184,10 @@ public class BookRideBean {
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Ride booked successfully!", ""));
-            return "Main";
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "An error occurred: " + e.getMessage(), ""));
-            return null;
         }
     }
 	
@@ -206,7 +215,43 @@ public class BookRideBean {
 		this.numSeats = numSeats;
 	}
 
+	public void createAlert() {
+		System.out.println("Meotodoa ez dago implementatuta");
+		/**
+		 try {
+	            Traveler currentTraveler = (Traveler) businessLogic.getCurrentUser();
+	            
+	            if (currentTraveler == null) {
+	                FacesContext.getCurrentInstance().addMessage(null, 
+	                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "You must be logged in as a traveler to create an alert.", ""));
+	                return;
+	            }
+	            
+	            if (selectedDepartCity == null || selectedArrivalCity == null || data == null) {
+	                FacesContext.getCurrentInstance().addMessage(null, 
+	                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please select valid criteria for the alert.", ""));
+	                return;
+	            }
+	            
+	            Alert newAlert = new Alert(selectedDepartCity, selectedArrivalCity, data, currentTraveler);
+	            
+	            businessLogic.createAlert(newAlert);
+	            businessLogic.updateTraveler(currentTraveler);
+	            	            
+	            FacesContext.getCurrentInstance().addMessage(null, 
+	                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Alert created successfully!", ""));
+	            
+	        } catch (Exception e) {
+	            FacesContext.getCurrentInstance().addMessage(null, 
+	                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "An error occurred while creating the alert: " + e.getMessage(), ""));
+	        }
+	        **/
+	}
+	
+	public boolean pressed () {
+		return this.isAukeratuPressed;
+	}
 	public String close() {
 		return "Main";
-		}
+	}
 }

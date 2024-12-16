@@ -8,6 +8,7 @@
 <f:view>
 	<h:head>
 		<title>Register</title>
+		<h:outputStylesheet library="css" name="style.css" />
 	</h:head>
 	<h:body>
 		<h:form>
@@ -40,7 +41,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center"><h:commandButton
-							value="Register" action="#{register.register}" /></td>
+							value="Register" action="#{register.register}" update="@form" /></td>
 				</tr>
 			</table>
 			<br />
@@ -52,7 +53,7 @@
 				<td><p:commandButton value="Back" immediate="true"
 						action="#{register.back}" /></td>
 			</tr>
-			<h:messages globalOnly="true" style="color:red;" />
+			<h:messages style="color:red" />
 		</h:form>
 	</h:body>
 </f:view>

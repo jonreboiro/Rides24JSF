@@ -47,7 +47,12 @@ public class ShowAllRidesBean {
 	}
 	
 	public String showRides() {
+		this.businessLogic.setChosenDriver(this.selectedDriver);
 		return "driversRides";
+	}
+	
+	public String close() {
+		return "Main";
 	}
 	
 }

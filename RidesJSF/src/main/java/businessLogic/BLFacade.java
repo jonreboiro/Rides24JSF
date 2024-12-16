@@ -5,7 +5,9 @@ import java.util.List;
 
 //import domain.Booking;
 import domain.Ride;
+import domain.Traveler;
 import domain.User;
+import domain.Alert;
 import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
@@ -96,5 +98,9 @@ public interface BLFacade {
 	public List<Ride> getRidesByDriver(String driverEmail);
 
 	public void bookRide(Booking booking);
+
+	public void createAlert(Alert newAlert);
+
+	public void updateTraveler(Traveler currentTraveler);
 
 }

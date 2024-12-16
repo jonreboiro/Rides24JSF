@@ -67,11 +67,11 @@
             </table>
             <p>
             <div style="text-align: center;">
-                <p:commandButton value="Create Ride" action="#{createRideBean.createRide}" />
+                <p:commandButton value="Create Ride" action="#{createRideBean.createRide}" update="@form" />
                 <p:commandButton value="Close" immediate="true" action="#{createRideBean.close}" />
                 </div>
             </p>
-            <h:messages globalOnly="true" style="color:blue" />
+            <h:messages style="color:blue" />
         </h:form>
     </h:body>
 </f:view>

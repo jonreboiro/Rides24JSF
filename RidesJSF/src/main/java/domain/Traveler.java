@@ -33,6 +33,7 @@ public class Traveler extends User implements Serializable {
 	public Traveler () {
 		super();
 	}
+	
 
 	public double getMoney() {
 		return money;

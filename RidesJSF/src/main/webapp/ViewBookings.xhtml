@@ -37,6 +37,8 @@
 				<tr>
 				<td><p:commandButton value="Close" immediate="true"
 						action="#{viewBookings.close}" /></td>
+				<td><p:commandButton value="Refresh"
+						action="#{viewBookings.refreshBookings}" update="bookingsTable" /></td>
 				</tr>
 			</table>
 		</h:form>

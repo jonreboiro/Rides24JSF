@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import dataAccess.DataAccess;
 import domain.Ride;
+import domain.Traveler;
 import domain.User;
+import domain.Alert;
 import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
@@ -134,6 +136,18 @@ public class BLFacadeImplementation implements BLFacade {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void createAlert(Alert newAlert) {
+		this.dbManager.createAlert(newAlert);
+		
+	}
+
+	@Override
+	public void updateTraveler(Traveler currentTraveler) {
+		this.dbManager.updateTraveler(currentTraveler);
+		
 	}
 
 }
