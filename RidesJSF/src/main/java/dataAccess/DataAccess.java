@@ -20,8 +20,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import configuration.UtilDate;
+import domain.Booking;
 import domain.Driver;
 import domain.Ride;
+import domain.Traveler;
 import domain.User;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
@@ -193,7 +195,7 @@ public class DataAccess {
 		session.beginTransaction();
 		List<Ride> res = new ArrayList<>();
 		Query query = session
-				.createQuery("SELECT r FROM Ride r WHERE r.fromCity=:from AND r.toCity=:to AND r.date=:date");
+				.createQuery("SELECT r FROM Ride r WHERE r.fromCity=:from AND r.toCity=:to AND r.date=:date AND r.nPlaces > 0");
 		query.setParameter("from", from);
 		query.setParameter("to", to);
 		query.setParameter("date", date);
@@ -326,5 +328,45 @@ public class DataAccess {
             throw e;
         }
     }
+
+	public void bookRide(Booking booking) throws Exception {
+	    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    session.beginTransaction();
+
+	    try {;
+	        
+	        Query queryRide = session.createQuery("FROM Ride r WHERE r.rideNumber = :rideN");
+	        queryRide.setParameter("rideN", booking.getRide().getRideNumber());
+	        Ride ride = (Ride) queryRide.uniqueResult();
+	        
+	        Query query = session.createQuery("FROM Traveler t WHERE t.email = :email");
+	        query.setParameter("email", booking.getTraveler().getEmail());
+	        Traveler traveler = (Traveler) query.uniqueResult();
+
+	        double totalPrice = ride.getPrice() * booking.getSeats();
+	        if (traveler.getMoney() < totalPrice) {
+	            throw new Exception("Insufficient funds.");
+	        }
+	        if (ride.getnPlaces() < booking.getSeats()) {
+	            throw new Exception("Not enough seats available.");
+	        }
+
+	        traveler.setMoney(traveler.getMoney() - totalPrice);
+
+	        ride.setnPlaces(ride.getnPlaces() - booking.getSeats());
+
+	        traveler.getBookedRides().add(booking);
+
+	        session.persist(booking);
+	        session.update(ride);
+	        session.update(traveler);
+
+	        session.getTransaction().commit();
+	    } catch (Exception e) {
+	        session.getTransaction().rollback();
+	        throw e;
+	    }
+	}
+
 
 }

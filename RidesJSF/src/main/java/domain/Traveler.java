@@ -14,13 +14,15 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue("TRAVELER")
 public class Traveler extends User implements Serializable {
-	private float money;
+	private double money;
+	@OneToMany(mappedBy = "traveler", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<Booking> bookedRides = new Vector<Booking>();
 	
 	private static final long serialVersionUID = 1L;
 	
 	public Traveler(String email, String name, String password) {
 		super(email, name, password, "Traveler");
-		this.money = 0;
+		this.money = 100;
 	}
 	
 	public Traveler(String email, String name, String password, float money) {
@@ -32,12 +34,25 @@ public class Traveler extends User implements Serializable {
 		super();
 	}
 
-	public float getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public void setMoney(float money) {
-		this.money = money;
+	public void setMoney(double d) {
+		this.money = d;
+	}
+	
+	public void addBookedRide(Booking bookedRide) {
+		bookedRides.add(bookedRide);
+		bookedRide.setTraveler(this);
+	}
+
+	public List<Booking> getBookedRides() {
+		return bookedRides;
+	}
+
+	public void setBookedRides(List<Booking> bookedRides) {
+		this.bookedRides = bookedRides;
 	}
 
 

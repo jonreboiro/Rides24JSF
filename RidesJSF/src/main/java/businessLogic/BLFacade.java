@@ -6,6 +6,7 @@ import java.util.List;
 //import domain.Booking;
 import domain.Ride;
 import domain.User;
+import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.RideAlreadyExistException;
@@ -93,5 +94,7 @@ public interface BLFacade {
 	public String getChosenDriver();
 
 	public List<Ride> getRidesByDriver(String driverEmail);
+
+	public void bookRide(Booking booking);
 
 }

@@ -55,6 +55,10 @@ public class MainBean {
     public String showAllRides () {
     	return "showAllRides";
     }
+    
+    public String bookRide() {
+    	return "bookRide";
+    }
 
    
 }

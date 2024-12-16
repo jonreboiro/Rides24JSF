@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title>Book rides</title>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h3>Book rides</h3>
+			<h:messages id="messages" style="color: red;" />
+			<table>
+				<tr>
+					<td>Depart City:</td>
+					<td><p:selectOneMenu id="departCity"
+							value="#{bookRide.selectedDepartCity}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItems value="#{bookRide.departCities}" var="city"
+								itemValue="#{city}" itemLabel="#{city}" />
+							<p:ajax event="change"
+								listener="#{bookRide.updateArrivalCities}"
+								update="arrivalCity rideTable" />
+						</p:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td>Arrival city:</td>
+					<td><p:selectOneMenu id="arrivalCity"
+							value="#{bookRide.selectedArrivalCity}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItems value="#{bookRide.arrivalCities}" var="arrival"
+								itemValue="#{arrival}" itemLabel="#{arrival}" />
+							<p:ajax event="change"
+								listener="#{bookRide.sartuArrivalCities}" />
+						</p:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td>Date:</td>
+					<td><p:calendar id="data" value="#{bookRide.data}"
+							navigator="true" mode="popup">
+							<p:ajax event="dateSelect" listener="#{bookRide.onDateSelect}"
+								update="mezuak"></p:ajax>
+						</p:calendar></td>
+				</tr>
+				<tr>
+					<td><p:commandButton value="Aukeratu"
+							action="#{bookRide.updateRides}" update="rideTable" /></td>
+				</tr>
+				<tr>
+					<td>Rides:</td>
+				</tr>
+				<tr>
+					<td><h:messages id="mezuak" style="color:blue" /> <p:dataTable
+							id="rideTable" var="ride" value="#{bookRide.filteredRides}"
+							selection="#{bookRide.selectedRide}" selectionMode="single"
+							rowKey="#{ride.rideNumber}" style="margin-top:20px;"
+							emptyMessage="No rides available for the selected criteria.">
+
+							<p:ajax event="rowSelect" listener="#{bookRide.onRowSelect}" update="@form:numSeats" />
+
+							<p:column headerText="Driver">
+								<h:outputText value="#{ride.driver.name}" />
+							</p:column>
+							<p:column headerText="Seats">
+								<h:outputText value="#{ride.nPlaces}" />
+							</p:column>
+							<p:column headerText="Price">
+								<h:outputText value="#{ride.price}" />
+							</p:column>
+						</p:dataTable></td>
+				</tr>
+				<tr>
+					<td>Number of seats:</td>
+					<td>
+						<p:selectOneMenu id="numSeats" value="#{bookRide.numSeats}" 
+								disabled="#{bookRide.selectedRide == null}" 
+								required="#{bookRide.selectedRide != null}">
+							<f:selectItems value="#{bookRide.seatOptions}" var="seat"
+								itemValue="#{seat}" itemLabel="#{seat}" />
+						</p:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td><p:commandButton value="Book"
+							action="#{bookRide.bookRide}" update="messages" /></td>
+				</tr>
+				<tr>
+					<td><p:commandButton value="Close" immediate="true"
+							action="#{bookRide.close}" /></td>
+				</tr>
+			</table>
+			<h:messages globalOnly="true" style="color:red;" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>

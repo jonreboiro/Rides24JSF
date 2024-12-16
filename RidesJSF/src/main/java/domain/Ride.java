@@ -136,6 +136,10 @@ public class Ride implements Serializable {
 	public float getnPlaces() {
 		return nPlaces;
 	}
+	
+	public void setnPlaces (float nPlaces) {
+		this.nPlaces = (int) nPlaces;
+	}
 
 	/**
 	 * Set the free places of the ride

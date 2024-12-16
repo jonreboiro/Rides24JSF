@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import dataAccess.DataAccess;
 import domain.Ride;
 import domain.User;
+import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.RideAlreadyExistException;
@@ -124,6 +125,15 @@ public class BLFacadeImplementation implements BLFacade {
 	@Override
 	public List<Ride> getRidesByDriver(String driverEmail) {
 		return this.dbManager.getRidesByDriver(driverEmail);
+	}
+
+	@Override
+	public void bookRide(Booking booking) {
+		try {
+			this.dbManager.bookRide(booking);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
