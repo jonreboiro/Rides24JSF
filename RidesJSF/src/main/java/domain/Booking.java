@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @TableGenerator(name = "Booking", initialValue = 0, allocationSize = 1)
@@ -29,6 +30,18 @@ public class Booking implements Serializable {
 	}
 	public Booking() {
 		
+	}
+	
+	public String getFromCity() {
+		return this.ride.getFromCity();
+	}
+	
+	public String getToCity() {
+		return this.ride.getToCity();
+	}
+	
+	public Date getDate() {
+		return this.ride.getDate();
 	}
 
 	public int getBookNumber() {

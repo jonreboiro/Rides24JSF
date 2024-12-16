@@ -47,19 +47,21 @@
                     </td>
                 </tr>
                 <tr>
+                	<td><p:commandButton value="ShowAllRides" action="#{Main.showAllRides}" rendered="#{Main.isDriver()}" />
+                	</td>
+                </tr>
+                <tr>
+                	<td><p:commandButton value="Book" action="#{Main.bookRide}" rendered="#{Main.isTraveler()}" />
+                	</td>
+                </tr>
+               <tr>
+                	<td><p:commandButton value="View bookings" action="#{Main.viewBookings}" rendered="#{Main.isTraveler()}" />
+                	</td>
+                </tr>  
+                <tr>
                 	<td><p:commandButton value="Logout" action="#{Main.logout}" rendered="#{Main.isLoggedIn()}" update="@form" />
                 	</td>
-                </tr>
-                <tr>
-                	<td><p:commandButton value="ShowAllRides" action="#{Main.showAllRides}" />
-                	</td>
-                </tr>
-                <tr>
-                	<td><p:commandButton value="Book" action="#{Main.bookRide}" />
-                	</td>
-                </tr>
-           
-
+                </tr>                         
 			</table>
 
 		</h:form>

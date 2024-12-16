@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title> Traveler's bookings </title>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h3>My bookings:</h3>
+			<table>
+				<tr>
+					<td><h:messages id="mezuak" style="color:blue" /> <p:dataTable
+							id="bookingsTable" var="booking" value="#{viewBookings.bookings}"
+							style="margin-top:20px;"
+							emptyMessage="You have no bookings.">
+							<p:column headerText="Depart City">
+								<h:outputText value="#{booking.fromCity}" />
+							</p:column>
+							<p:column headerText="Arrival City">
+								<h:outputText value="#{booking.toCity}" />
+							</p:column>
+							<p:column headerText="Date">
+								<h:outputText value="#{booking.date}" />
+							</p:column>
+							<p:column headerText="Seats">
+								<h:outputText value="#{booking.seats}" />
+							</p:column>
+						</p:dataTable></td>
+				</tr>
+				<tr>
+				<td><p:commandButton value="Close" immediate="true"
+						action="#{viewBookings.close}" /></td>
+				</tr>
+			</table>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

@@ -43,6 +43,13 @@ public class MainBean {
         return false;
     }
     
+    public boolean isTraveler() {
+    	if (this.businessLogic.getCurrentUser() != null) {
+    		return this.businessLogic.getCurrentUser() instanceof Traveler;
+    	}
+        return false;
+    }
+    
     public boolean isLoggedIn() {
         return this.businessLogic.getCurrentUser() != null;
     }
@@ -58,6 +65,10 @@ public class MainBean {
     
     public String bookRide() {
     	return "bookRide";
+    }
+    
+    public String viewBookings() {
+    	return "viewBookings";
     }
 
    

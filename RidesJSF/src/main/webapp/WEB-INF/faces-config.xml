@@ -48,6 +48,11 @@
 		<managed-bean-class>rides.bean.BookRideBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>viewBookings</managed-bean-name>
+		<managed-bean-class>rides.bean.ViewBookingsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 
@@ -152,6 +157,14 @@
 		<navigation-case>
 			<from-outcome>bookRide</from-outcome>
 			<to-view-id>/BookRide.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Main.xhtml</display-name>
+		<from-view-id>/Main.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>viewBookings</from-outcome>
+			<to-view-id>/ViewBookings.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
